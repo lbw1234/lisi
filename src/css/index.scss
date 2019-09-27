@@ -1,0 +1,80 @@
+@import './a.scss';
+
+body{
+	/*这是注释文件*/
+	background:/*这是注释文件*/pink;
+	/*我是符合规范的注释*/
+	//注释:编译成css文件后,该注释不存在,这种注释叫做静默注释
+}
+
+//嵌套语法
+#contnet{
+	background:red;
+	.artical{
+		background:pink;
+		p{
+			color:white;
+		}
+	}
+}
+
+article{
+	dl>{
+		dt{color: #333}
+		dd{color: #555}
+	}
+}
+
+$color:#f90;
+$width:200px;
+nav{
+	$width:400px !default;
+	width: $width;
+	color: $color;
+}
+
+@mixin round-conner($width,$num:1px){
+	-moz-border-radius:$num;
+	-webkit-border-radius:$num;
+	border-radius: $num;
+	width: $width;
+}
+
+div{
+	width: 100px;
+	height: $width;
+	@include round-conner($num:10px,$width:500px)
+}
+p{
+	text-align:center;
+	@include round-conner(50%,600px)
+}
+
+@mixin bg-image($url){
+	background:url('#{$url}@1x.jpg');
+@media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){
+	background:url('#{$url}@2x.jpg');
+
+}
+@media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+	background:url('#{$url}@3x.jpg');
+}
+}
+span{
+	@if(1==1){border: 1px solid #ccc};
+	@if(2>4){background: red};
+}
+
+@for $i from 1 through 3{
+	//through包含3
+	.item-#{$i}{
+		width: 2em*$i
+	}
+}
+
+@for $i from 1 to 3{
+	//tu不包含3
+	.item-#{$i}{
+		width: 2em*$i
+	}
+}
